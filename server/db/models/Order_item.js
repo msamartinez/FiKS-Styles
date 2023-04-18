@@ -22,4 +22,4 @@ const OrderItem = db.define('orderitem', {
   }
 })
 
-export default OrderItem
+module.exports = OrderItem

@@ -25,7 +25,7 @@ const Product = db.define('product', {
     type:Sequelize.TEXT
   },
   category:{
-    type: Sequelize.ENUM('Top', 'Buttom', 'Dress'),
+    type: Sequelize.ENUM('Top', 'Bottom', 'Dress'),
     defaultValue: 'Top'
   }
   

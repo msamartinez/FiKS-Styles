@@ -18,10 +18,8 @@ Product.belongsToMany(OrderItem, {through: OrderDetail})
 
 module.exports = {
   db,
-  models: {
-    Product,
-    OrderDetail,
-    OrderItem,
-    User
-  },
-}
+  Product,
+  OrderDetail,
+  OrderItem,
+  User,
+};
