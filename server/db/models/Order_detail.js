@@ -10,7 +10,9 @@ const OrderDetail = db.define('orderdetail', {
     type: Sequelize.INTEGER,
     defaultValue: 1
   },
-  
+  user_id:{
+    type:Sequelize.INTEGER
+  }
 })
 
 module.exports = OrderDetail

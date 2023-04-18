@@ -13,6 +13,12 @@ const OrderItem = db.define('orderitem', {
   status: {
     type: Sequelize.ENUM('pending', 'completed'),
     allowNull: false
+  },
+  orders_id:{
+    type:Sequelize.INTEGER
+  },
+  products_id:{
+    type:Sequelize.INTEGER
   }
 })
 

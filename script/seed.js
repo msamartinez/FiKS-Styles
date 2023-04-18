@@ -34,7 +34,7 @@ const seed = async () => {
   );
 
   await Promise.all(
-    ordersdetails.map(order => {
+    ordersDetails.map(order => {
       return OrderDetail.create(order);
     })
   );
