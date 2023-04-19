@@ -5,7 +5,6 @@ router.get('/cart', async (req, res, next) => {
     try {
       const order = await OrderItem.findOne({
         where: {
-          userId: req.user.id,
           status: 'pending'
         },
         include: [{model: Product}]
