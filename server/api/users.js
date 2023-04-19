@@ -1,17 +1,55 @@
 const router = require('express').Router()
-const { models: { User }} = require('../db')
-module.exports = router
+const  {User} = require('../db/index')
+
+function isAccess(req, res, next) {
+  if (!req.user || req.user.securityClearance !== 'admin')
+    return res.status(403).json('HEY GUY, WRONG PLACE')
+  next()
+}
+
+function isUserAccess(req, res, next) {
+  if (req.user.id.toString() !== req.params.id)
+    return res.status(403).json('HEY GUY, WRONG PLACE')
+  else next()
+}
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'username']
-    })
+    const users = await User.findAll()
     res.json(users)
   } catch (err) {
     next(err)
   }
 })
+
+router.get('/:id', isUserAccess, async (req, res, next) => {
+  try {
+    const users = await User.findOne({
+      where: {
+        id: req.user.id
+      },
+      attributes: ['id', 'email','address','firstName','lastName']
+    })
+    res.json(users)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/:id', isUserAccess, async (req, res, next) => {
+  try {
+    const users = await User.findOne({
+      where: {
+        id: req.user.id
+      },
+      attributes: ['id', 'email','address','firstName','lastName']
+    })
+    users.update({firstName: req.body.firstName, lastName: req.body.lastName, address: req.body.address})
+    res.json(users)
+  } catch (error) {
+    next(error)
+  }
+})
+
+
+module.exports = router
