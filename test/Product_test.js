@@ -40,4 +40,5 @@ describe("Product model", () => {
         });
   });
 }); // end describe('Product model')
+
 //! edit both descritpions
