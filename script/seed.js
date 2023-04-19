@@ -60,6 +60,49 @@ const products = [{
   category: 'Dress',
 }];
 
+const ordersDetail=[{
+  price:"39.99",
+  user_id:1,
+  productId:2,
+  orderitemId:1
+},
+{
+  price:"29.99",
+  user_id:2,
+  productId:3,
+  orderitemId:2
+},
+{
+  price:"39.99",
+  user_id:3,
+  productId:4,
+  orderitemId:3
+}
+];
+
+const orderItem=[
+  {
+  
+    status:"completed",
+    orders_id:1,
+    productId:2,
+    userId:1
+  },
+  {
+    status:"completed",
+    orders_id:2,
+    products_id:3,
+    userId:2
+  },
+  {
+    status:"completed",
+    orders_id:3,
+    products_id:4,
+    userId:3
+  },
+];
+
+
 
 const seed = async () => {
   try {
@@ -76,18 +119,19 @@ const seed = async () => {
             return Product.create(product);
           })
         );
+        await Promise.all(
+          orderItem.map(orderItem => {
+            return OrderItem.create(orderItem);
+          })
+        );
 
-        // await Promise.all(
-        //   ordersDetail.map(order => {
-        //     return OrderDetail.create(order);
-        //   })
-        // );
+        await Promise.all(
+          ordersDetail.map(order => {
+            return OrderDetail.create(order);
+          })
+        );
 
-        // await Promise.all(
-        //   orderItem.map(orderItem => {
-        //     return OrderItem.create(orderItem);
-        //   })
-        // );
+        
 
         console.log(green('Seeding success!'));
 
