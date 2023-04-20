@@ -27,6 +27,7 @@ const Products = () => {
       const Bottom = products.filter(
         (product) => product.category === "Bottom"
       );
+
       const Dress = products.filter(
         (product) => product.category === "Dress"
       );
@@ -69,7 +70,7 @@ const Products = () => {
               Top.map((product) => (
                 <Product product={product} key={product.id} />
               ))}
-            {value === "BUTTOM" &&
+            {value === "BOTTOM" &&
                Bottom.map((product) => (
                 <Product product={product} key={product.id} />
               ))}
