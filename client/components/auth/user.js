@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Checkout=()=>{
+const User=()=>{
     return (
         <div>
-            checkout
+           User
         </div>
     )
 }
 
-export default Checkout
+export default User
