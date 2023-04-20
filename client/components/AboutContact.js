@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react';
-import Navbar from './Navbar';
+import Navbar from './global/Navbar';
 import { Routes, Route, Link } from 'react-router-dom'; //! dont think I need this
 
 const AboutContact = () => {
