@@ -31,7 +31,7 @@ const App = () => {
       <ScrollToTop />
       <Routes>
        <Route path="/" element={<Main/>}></Route>
-       <Route path="/item/:itemId" element={<ProductDetail/>}></Route>
+       <Route path="/product/:productId" element={<ProductDetail/>}></Route>
        <Route path="checkout" element={<Checkout />} />
        <Route path="checkout/success" element={<Confirmation/>} />
        <Route path="/signup" element= {<SignupLogin/>} />

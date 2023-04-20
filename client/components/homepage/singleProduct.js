@@ -30,7 +30,7 @@ const Product=(props)=>{
           width="300px"
           height="400px"
           src={product.imageURL}
-          onClick={() => navigate(`/item/${product.id}`)}
+          onClick={() => navigate(`/product/${product.id}`)}
           style={{ cursor: "pointer" }}
         />
         <Box
