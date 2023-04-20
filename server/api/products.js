@@ -1,57 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
-    isCartOpen: false,
-    cart: [],
-    items: [],
-  };
+const router = require('express').Router();
+const Product = require('../db/models/Product');
 
-  export const cartSlice = createSlice({
-    name: "cart",
-    initialState,
-    reducers: {
-      setItems: (state, action) => {
-        state.items = action.payload;
-      },
-  
-      addToCart: (state, action) => {
-        state.cart = [...state.cart, action.payload.item];
-      },
-  
-      removeFromCart: (state, action) => {
-        state.cart = state.cart.filter((item) => item.id !== action.payload.id);
-      },
-  
-      increaseCount: (state, action) => {
-        state.cart = state.cart.map((item) => {
-          if (item.id === action.payload.id) {
-            item.count++;
-          }
-          return item;
-        });
-      },
-  
-      decreaseCount: (state, action) => {
-        state.cart = state.cart.map((item) => {
-          if (item.id === action.payload.id && item.count > 1) {
-            item.count--;
-          }
-          return item;
-        });
-      },
-  
-      setIsCartOpen: (state) => {
-        state.isCartOpen = !state.isCartOpen;
-      },
-    },
-  });
-  
-  export const {
-    setItems,
-    addToCart,
-    removeFromCart,
-    increaseCount,
-    decreaseCount,
-    setIsCartOpen,
-  } = cartSlice.actions;
-  
-  export default cartSlice.reducer;
+router.get('/', async (req, res, next) => {
+    try {
+        const product = await Product.findAll();
+        res.json(product);
+    }
+    catch (error) {
+        next (error);
+    }
+})
+
+router.get('/:id', async (req, res, next) => {
+    try {
+        const product = await Product.findByPk(req.params.id);
+        res.json(product);
+    }
+    catch (error) {
+        next (error);
+    }
+})
+
+module.exports = router
