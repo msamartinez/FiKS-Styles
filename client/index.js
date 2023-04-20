@@ -5,7 +5,7 @@ import { CssBaseline } from '@mui/material';
 import store from './store/store';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
-import './index.css';
+// import '.index.css';
 import {theme} from "./theme"
 import { ThemeProvider } from '@emotion/react';
 const root = createRoot(document.getElementById('app'));

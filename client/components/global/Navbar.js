@@ -12,7 +12,6 @@ const Navbar =()=>{
   const Navigate= useNavigate()
   const dispatch = useDispatch()
   const cart= useSelector(state=>state.cart)
-  const menu=useSelector(state=>state.menu)
 
     return (
      <Box display="flex"

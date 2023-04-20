@@ -21,7 +21,6 @@ const Cart =()=>{
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
-
   const totalPrice = cart.reduce((total, item) => {
     return total + item.count * item.attributes.price;
   }, 0);
@@ -113,7 +112,7 @@ const Cart =()=>{
             ))}
           </Box>
 
-          {/* ACTIONS */}
+         
           <Box m="20px 0">
             <FlexBox m="20px 0">
               <Typography fontWeight="bold">SUBTOTAL</Typography>

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import OrderHistory from "./OrderHistory";
 
-function SignupLogin() {
+const SignupLogin=()=>{
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
