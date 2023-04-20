@@ -1,13 +1,17 @@
 import React from 'react';
 import Navbar from './components/global/Navbar';
 import { useEffect } from 'react';
-import {BrowserRouter, Routes,Route,useLocation} from "react-router-dom"
+import {Routes,Route,useLocation} from "react-router-dom"
 import './index.css';
 import Main from "./components/homepage/Main"
 import ProductDetail from './components/productDetail';
 import Checkout from './components/checkout/Checkout';
 import Confirmation from './components/checkout/confirmation';
 import SignupLogin from "./components/SignUpLogin"
+import Cart from "./components/global/cart";
+import User from "./components/auth/user"
+
+
 const ScrollToTop = ()=>{
   const {pathname}=useLocation()
 
@@ -21,7 +25,6 @@ const ScrollToTop = ()=>{
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
       <Navbar />
       <ScrollToTop/>
 
@@ -31,14 +34,11 @@ const App = () => {
       <Route path="checkout" element={<Checkout />} />
        <Route path="checkout/success" element={<Confirmation/>} />
        <Route path="/signup" component= {<SignupLogin/>} />
-
-  {/* <Route path="/user" component={UserHome} />
-  <Route path="/admin" component={AdminHome} />  */}
+       <Route path="/user" component= {<User/>} />
        </Routes>
        
        <Cart/>
-       <Footer/>
-      </BrowserRouter>
+  
     </div>
   );
 };
