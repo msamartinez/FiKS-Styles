@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import slice
+// insert slices
 
-const Tops = () => {
-    const top = useSelector();
-    const dispatch = useDispatch();
+const Products = () => {
+    const tops = useSelector();
+    const bottoms = useSelector();
+    const dispatch = useDispatch;
 
     useEffect(() => {
         dispatch();
@@ -12,11 +13,9 @@ const Tops = () => {
 
     return (
         <div>
-            <h2>All Tops</h2>
-            <br/>
-            {/* map through products? */}
+            <h2>All Products</h2>
         </div>
     );
 };
 
-export default Tops;
+export default Products;
