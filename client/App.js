@@ -1,8 +1,7 @@
 import React from 'react';
 import Navbar from './components/global/Navbar';
 import { useEffect } from 'react';
-import {Routes,Route,useLocation} from "react-router-dom"
-import './index.css';
+import {Routes, Route, useLocation} from "react-router-dom"
 import Main from "./components/homepage/Main"
 import ProductDetail from './components/productDetail';
 import Checkout from './components/checkout/Checkout';
@@ -14,22 +13,22 @@ import Menu from './components/global/menu';
 import SizeChart from './components/SizeChart';
 import AboutContact from "./components/AboutContact"
 
-// const ScrollToTop = ()=>{
-//   const {pathname}=useLocation()
+const ScrollToTop = ()=>{
+  const {pathname}=useLocation()
 
-//   useEffect(()=>{
-//     window.scrollTo(0,0)
-//   },[pathname])
-//   return null 
-// }
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[pathname])
+  return null 
+}
 
 
 const App = () => {
   return (
     <div>
       <Navbar />
-      {/* <ScrollToTop/> */}
-
+       
+      <ScrollToTop />
       <Routes>
        <Route path="/" element={<Main/>}></Route>
        <Route path="/item/:itemId" element={<ProductDetail/>}></Route>
