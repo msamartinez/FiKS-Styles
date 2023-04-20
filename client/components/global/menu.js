@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const FlexBox = styled(Box)`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `
 
@@ -30,47 +30,48 @@ return (
      display={ isMenuOpen ? "block" : "none"}
      position="fixed"
       zIndex={10}
-      width="50%"
+      width="100%"
       height="100%"
       left="0"
       top="0"
       overflow="auto"
+      color="black" 
+      backgroundColor="rgba(0, 0, 0, 0.4)"
     >
       <Box
         position="fixed"
         right="0"
         bottom="0"
-        width="max(200px, 30%)"
         height="100%"
         backgroundColor="white"
         color="black"
       >
         <Box padding="30px" overflow="auto" height="100%" margin="auto">
-          <FlexBox mb="15px" margin="auto">
+          <FlexBox mb="15px" >
             <Typography variant="h3">MENU</Typography>
             <IconButton onClick={() => dispatch(setIsMenuOpen())}>
               <CloseIcon />
             </IconButton>
           </FlexBox>
 
-          <FlexBox  p="15px 0" onClick={() => {navigate("/signup")}} margin="auto">
+          <FlexBox  p="15px 0" onClick={() => {navigate("/signup")}}>
           <IconButton>
             <PeopleOutlinedIcon size={30}/>
-            <Typography>SignUp/Login</Typography>
+            <Typography variant="h4">SignUp/Login</Typography>
             </IconButton>
           </FlexBox>
 
-          <FlexBox  p="15px 0" onClick={() => {navigate("/sizechart")}} margin="auto">
+          <FlexBox  p="15px 0" onClick={() => {navigate("/sizechart")}} >
           <IconButton>
             <CheckroomOutlinedIcon size={30}/>
-            <Typography>SizeChart</Typography>
+            <Typography variant="h4">SizeChart</Typography>
             </IconButton>
             </FlexBox>
 
-            <FlexBox  p="15px 0" onClick={() => {navigate("/contact")}} margin="auto">
+            <FlexBox  p="15px 0" onClick={() => {navigate("/contact")}}>
                 <IconButton>
               <ContactlessOutlinedIcon size={30} />
-            <Typography >Contact Us</Typography>
+            <Typography variant="h4" >Contact Us</Typography>
             </IconButton>
             </FlexBox>
 

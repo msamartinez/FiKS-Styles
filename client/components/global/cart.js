@@ -35,6 +35,7 @@ const Cart =()=>{
       left="0"
       top="0"
       overflow="auto"
+      backgroundColor="rgba(0, 0, 0, 0.4)"
     >
       <Box
         position="fixed"
@@ -43,6 +44,7 @@ const Cart =()=>{
         width="max(400px, 30%)"
         height="100%"
         backgroundColor="white"
+        
       >
         <Box padding="30px" overflow="auto" height="100%">
           <FlexBox mb="15px">
@@ -53,7 +55,7 @@ const Cart =()=>{
           </FlexBox>
 
 
-          <Box>
+          <Box >
             {cart.map((item) => (
               <Box key={item.id}>
                 <FlexBox p="15px 0">

@@ -14,21 +14,21 @@ import Menu from './components/global/menu';
 import SizeChart from './components/SizeChart';
 import AboutContact from "./components/AboutContact"
 
-const ScrollToTop = ()=>{
-  const {pathname}=useLocation()
+// const ScrollToTop = ()=>{
+//   const {pathname}=useLocation()
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[pathname])
-  return null 
-}
+//   useEffect(()=>{
+//     window.scrollTo(0,0)
+//   },[pathname])
+//   return null 
+// }
 
 
 const App = () => {
   return (
     <div>
       <Navbar />
-      <ScrollToTop/>
+      {/* <ScrollToTop/> */}
 
       <Routes>
        <Route path="/" element={<Main/>}></Route>
