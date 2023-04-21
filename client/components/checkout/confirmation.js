@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Checkout} from "./Checkout"; //* im going somewhere with this. give me a minute
 
 function Confirmation() {
   return (
@@ -12,3 +13,6 @@ function Confirmation() {
 }
 
 export default Confirmation;
+
+
+//* I think something else is missing here so i'll come back to this later
