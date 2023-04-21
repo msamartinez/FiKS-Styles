@@ -1,20 +1,12 @@
 
 import React from "react";
-import { Cart } from "../global/Cart";
 
-function OrderSummary(props) {
-  const { items, totalPrice } = props;
+function OrderSummary() {
+  
 
   return (
     <div>
-      <h2>Order Summary</h2>
-      <ul>
-        {items.map(item => (
-          <li key={item.id}>{item.name} - ${item.price}</li>
-        ))}
-      </ul>
-      <p>Total Price: ${totalPrice}</p>
-      <button onClick={() => console.log('Confirm cart')}>Confirm Cart</button>
+      OrderSummary
     </div>
   );
 }

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const User = require('../db/index');
+const {User} = require('../db/index');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {

@@ -1,10 +1,8 @@
 import React from 'react';
-
+import AdminPage from "./AdminPage"
 const User=()=>{
     return (
-        <div>
-           User
-        </div>
+        <AdminPage/>
     )
 }
 

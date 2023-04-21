@@ -44,6 +44,7 @@ const Navbar =()=>{
           <IconButton >
             <SearchOutlined></SearchOutlined>
           </IconButton>
+          
           <IconButton onClick={() => {
                 Navigate("/user")}} >
             <PersonOutline/>

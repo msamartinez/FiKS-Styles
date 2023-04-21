@@ -1,8 +1,9 @@
 import React, { useEffect, useState} from 'react';
-import Navbar from './global/Navbar';
-import { Routes, Route, Link } from 'react-router-dom'; //! dont think I need this
+
 
 const AboutContact = () => {
+
+
     const [data, setData] = useState({});
     
     useEffect(() => {
@@ -13,7 +14,6 @@ const AboutContact = () => {
     
     return (
         <div>
-        <Navbar />
         <h1>About</h1>
         <p>Bacon ipsum dolor amet short ribs brisket venison rump drumstick </p>
         <h1>Contact</h1>

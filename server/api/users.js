@@ -1,17 +1,17 @@
 const router = require('express').Router()
 const  {User} = require('../db/index')
 
-function isAccess(req, res, next) {
-  if (!req.user || req.user.securityClearance !== 'admin')
-    return res.status(403).json('HEY GUY, WRONG PLACE')
-  next()
-}
+// function isAccess(req, res, next) {
+//   if (!req.user || req.user.securityClearance !== 'admin')
+//     return res.status(403).json('HEY GUY, WRONG PLACE')
+//   next()
+// }
 
-function isUserAccess(req, res, next) {
-  if (req.user.id.toString() !== req.params.id)
-    return res.status(403).json('HEY GUY, WRONG PLACE')
-  else next()
-}
+// function isUserAccess(req, res, next) {
+//   if (req.user.id.toString() !== req.params.id)
+//     return res.status(403).json('HEY GUY, WRONG PLACE')
+//   else next()
+// }
 
 router.get('/', async (req, res, next) => {
   try {
@@ -22,34 +22,53 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', isUserAccess, async (req, res, next) => {
-  try {
-    const users = await User.findOne({
-      where: {
-        id: req.user.id
-      },
-      attributes: ['id', 'email','address','firstName','lastName']
-    })
-    res.json(users)
-  } catch (error) {
+router.get('/:userId', async(req,res,next)=>{
+  try{
+    const single = await User.findByPk(
+      req.params.userId
+    )
+    if(single){
+      res.send(single)
+    }else{
+      res.status(404).send("Not Found")
+    }
+  }
+  catch(error){
     next(error)
   }
 })
 
-router.post('/:id', isUserAccess, async (req, res, next) => {
-  try {
-    const users = await User.findOne({
-      where: {
-        id: req.user.id
-      },
-      attributes: ['id', 'email','address','firstName','lastName']
-    })
-    users.update({firstName: req.body.firstName, lastName: req.body.lastName, address: req.body.address})
-    res.json(users)
-  } catch (error) {
+router.post('/', async(req,res,next)=>{
+  try{
+    const newUser = await User.create(req.body)
+      res.send(newUser)
+  }
+  catch(error){
     next(error)
   }
 })
+
+
+router.delete('/:userId', async(req,res,next)=>{
+  try{
+    const deleteuser = await User.destroy({ where: {id : req.params.userId }})
+      res.sendStatus(204)
+    }
+  catch(error){
+    next(error)
+  }
+})
+
+router.put('/:userId', async(req,res,next)=>{
+  try{
+      const target = await User.findByPk(req.params.userId)
+      res.send(await target.update(req.body))
+  }
+  catch(error){
+    next(error)
+  }
+})
+
 
 
 module.exports = router
