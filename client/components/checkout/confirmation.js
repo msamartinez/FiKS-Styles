@@ -1,11 +1,2 @@
-import React from 'react';
-
-const Confirmation =()=>{
-    return(
-        <div>
-            confirmation
-        </div>
-    )
-}
-
-export default Confirmation
+//! changed the file name to Confirmation.js
+//* lets capitalize first letters for component files to match other files
