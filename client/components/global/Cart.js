@@ -15,14 +15,13 @@ const FlexBox = styled(Box)`
   align-items: center;
 `
 
-
 const Cart =()=>{
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
-  const totalPrice = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.price;
+  const totalPrice = cart.reduce((total, product) => {
+    return total + product.count * product.price;
   }, 0);
 
     return (
@@ -56,31 +55,31 @@ const Cart =()=>{
 
 
           <Box >
-            {cart.map((item) => (
-              <Box key={item.id}>
+            {cart.map((product) => (
+              <Box key={product.id}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     <img
-                      alt={item.name}
+                      alt={product.name}
                       width="123px"
                       height="164px"
-                      src={item.imageUrl}
+                      src={product.imageUrl}
                     />
                   </Box>
                   <Box flex="1 1 60%">
                     <FlexBox mb="5px">
                       <Typography fontWeight="bold">
-                        {item.name}
+                        {product.name}
                       </Typography>
                       <IconButton
                         onClick={() =>
-                          dispatch(removeFromCart({ id: item.id }))
+                          dispatch(removeFromCart({ id: product.id }))
                         }
                       >
                         <CloseIcon />
                       </IconButton>
                     </FlexBox>
-                    <Typography>{item.shortDescription}</Typography>
+                    <Typography>{product.shortDescription}</Typography>
                     <FlexBox m="15px 0">
                       <Box
                         display="flex"
@@ -89,22 +88,22 @@ const Cart =()=>{
                       >
                         <IconButton
                           onClick={() =>
-                            dispatch(decreaseCount({ id: item.id }))
+                            dispatch(decreaseCount({ id: product.id }))
                           }
                         >
                           <RemoveIcon />
                         </IconButton>
-                        <Typography>{item.count}</Typography>
+                        <Typography>{product.count}</Typography>
                         <IconButton
                           onClick={() =>
-                            dispatch(increaseCount({ id: item.id }))
+                            dispatch(increaseCount({ id: product.id }))
                           }
                         >
                           <AddIcon />
                         </IconButton>
                       </Box>
                       <Typography fontWeight="bold">
-                        ${item.price}
+                        ${product.price}
                       </Typography>
                     </FlexBox>
                   </Box>

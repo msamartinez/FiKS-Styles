@@ -19,7 +19,6 @@ const Navbar =()=>{
        width="100%"
        height="60px"
        color="black"
-       position="fixed"
        top="o"
        left="0"
        zIndex="1"

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchProducts = createAsyncThunk('fetchProducts', async() => {
+export const fetchProducts = createAsyncThunk('products/getAll', async() => {
     try {
         const { data } = await axios.get(`api/products`);
         return data;
@@ -11,7 +11,7 @@ export const fetchProducts = createAsyncThunk('fetchProducts', async() => {
     }
 });
 
-export const fetchSingleProduct = createAsyncThunk('singleProduct', async() => {
+export const fetchSingleProduct = createAsyncThunk('products/getSingleProduct', async() => {
     try {
         const { data } = await axios.get(`api/products/${id}`);
         return data;
@@ -21,23 +21,29 @@ export const fetchSingleProduct = createAsyncThunk('singleProduct', async() => {
     }
 });
 
+
+
+const initialState = {
+    allProducts: [],
+    singleProduct: {},
+    status: 'idle',
+  error: null,
+  };
+
 export const productSlice = createSlice({
     name: 'products',
-    initialState: {},
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchProducts.fulfilled, (state, action) => {
-                return action.payload;
+                state.allProducts= action.payload;
             })
             .addCase(fetchSingleProduct.fulfilled, (state, action) => {
-                return action.payload;
+               state.singleProduct=action.payload;
             })
     },
 });
 
-export const selectProducts = (state) => {
-    return state.products;
-};
 
 export default productSlice.reducer;
