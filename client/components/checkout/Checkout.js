@@ -163,6 +163,5 @@ function Checkout() {
       <button onClick={handlePayNow}>Pay Now</button>
     </div>
   );
-}
 
 export default Checkout;
