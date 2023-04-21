@@ -22,13 +22,13 @@ export const fetchSingleProduct = createAsyncThunk('products/getSingleProduct', 
 });
 
 
+
 const initialState = {
     allProducts: [],
     singleProduct: {},
     status: 'idle',
   error: null,
   };
-
 
 export const productSlice = createSlice({
     name: 'products',
@@ -44,7 +44,6 @@ export const productSlice = createSlice({
             })
     },
 });
-
 
 
 export default productSlice.reducer;

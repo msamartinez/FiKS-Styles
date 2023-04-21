@@ -19,8 +19,7 @@ const Products = () => {
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
-
-      
+   
      const Top = products.filter(
         (product) => product.category === "Top"
       );

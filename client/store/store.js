@@ -4,10 +4,12 @@ import authReducer from '../store/authSlice';
 import CartReducer from "../store/cartSlice"
 import menuReducer from "../store/menuslice"
 import productReducer from "../store/productSlice"
+
 const store = configureStore({
   reducer: { 
     auth: authReducer ,
     cart : CartReducer,
+    product: productSlice,
     menu: menuReducer,
     products:productReducer
   },
