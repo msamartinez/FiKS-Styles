@@ -1,9 +1,2 @@
-import React from 'react';
-
-const Cart =()=>{
-    return (
-        <div>Cart</div>
-    )
-}
-
-export default Cart
+//! changed the file name to Cart.js
+//* lets capitalize first letters for component files to match other files
