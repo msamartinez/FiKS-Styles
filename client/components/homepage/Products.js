@@ -4,12 +4,13 @@ import { fetchProducts, fetchSingleProduct } from '../../store/productSlice';
 
 const Products = () => {
     const allProducts = useSelector(fetchProducts);
+    console.log(allProducts)
     const product = useSelector(fetchSingleProduct);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchProducts());
-    }, [dispatch, id]);
+    }, [dispatch]);
 
     return (
         <div>
