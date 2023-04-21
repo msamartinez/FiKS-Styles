@@ -1,5 +1,5 @@
 import React from "react";
-import { cart } from "../global/cart";
+import { Cart } from "../global/Cart";
 
 function OrderSummary(props) {
   const { items, totalPrice } = props;
