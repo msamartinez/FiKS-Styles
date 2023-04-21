@@ -15,7 +15,6 @@ const FlexBox = styled(Box)`
   align-items: center;
 `
 
-
 const Cart =()=>{
   const navigate = useNavigate();
   const dispatch = useDispatch();
