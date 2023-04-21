@@ -11,7 +11,7 @@ const User = require ("./models/User")
 User.hasMany(OrderItem)
 OrderItem.belongsTo(User)
 
-OrderItem.hasMany(Product)
+OrderItem.belongsToMany(Product,{through: OrderDetail} )
 Product.belongsToMany(OrderItem, {through: OrderDetail})
 
 

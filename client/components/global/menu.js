@@ -22,8 +22,6 @@ const Menu =()=>{
   const isMenuOpen = useSelector((state) =>state.menu.isMenuOpen);
 
 
-  console.log(isMenuOpen)
-
 
 return (
     <Box 
