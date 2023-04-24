@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { me } from './store/authSlice';
 import Main from "./components/homepage/Main"
 import ProductDetail from './components/homepage/productDetail';
 import Checkout from './components/checkout/Checkout';

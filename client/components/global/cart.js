@@ -27,7 +27,7 @@ const Cart =()=>{
     return total + product.count * product.price;
   }, 0).toFixed(2);
 
-  // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
 
 
   // useEffect(() => {
@@ -131,7 +131,7 @@ const Cart =()=>{
               <Typography fontWeight="bold">${totalPrice}</Typography>
             </FlexBox>
             
-              {/* {isLoggedIn ? ( */}
+              {isLoggedIn ? (
             <Button
               sx={{
                 backgroundColor: shades.primary[500],
@@ -148,7 +148,7 @@ const Cart =()=>{
             >
               CHECKOUT
             </Button>
-            {/* ) : (
+             ) : (
               
               <Button
               sx={{
@@ -165,7 +165,7 @@ const Cart =()=>{
             >
                Please Login First
             </Button>
-            )} */}
+            )} 
             
           </Box>
         </Box>
