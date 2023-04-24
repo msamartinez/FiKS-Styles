@@ -2,16 +2,16 @@
 
 As a customer/visitor, I want to be able to:
     [ ]access a deployed version of the website so I can browse and purchase products.
-    [ ]view all available products so I can pick from a variety.
+    [X]view all available products so I can pick from a variety.
     [ ]view a single product so I can see more details.
-    [ ]add a product to my cart so I can collect my desired products in one place.
+    [X]add a product to my cart so I can collect my desired products in one place.
     [ ]edit my cart if I change my mind:
         [ ]change the quantity of a product in my cart.
-        [ ]remove a product in my cart.
+        [X]remove a product in my cart.
         [ ]No one else should be able to edit my cart except me.
-    [ ]"checkout" the items in my cart so I can purchase my desired goods.
+    [X]"checkout" the items in my cart so I can purchase my desired goods.
         [ ]Think of a typical user experience on popular websites from a guest user and logged-in user perspective.
-        [ ]You can just start with by simulating the experience of checking out with a simple confirmation page.
+        [X]You can just start with by simulating the experience of checking out with a simple confirmation page.
     [ ]create an account so I can have a logged-in experience.
     
 
@@ -40,9 +40,9 @@ As an engineer, I want to:
 ## TIER 2 E-Commerce Essentials
 
 As a customer, I want to be able to:
-    [ ]see all products that belong to a certain category.
-        [ ]Keep this simple. For example, a product can only belong to one category.
-    [ ]explore an aesthetically pleasing website so I can easily navigate around and enjoy the experience (UI/UX).
+    [X]see all products that belong to a certain category.
+        [X]Keep this simple. For example, a product can only belong to one category.
+    [X]explore an aesthetically pleasing website so I can easily navigate around and enjoy the experience (UI/UX).
         [ ]This includes front-end data validations. For example, if certain fields of a form are required and must be in a specific format, this is obvious to the user.
     [ ]have a persistent cart so I can revisit and pick up where I left off.
         [ ]There are two more experiences to consider here. Explore your favorite websites to see what the intended behavior is for the following cases:
