@@ -5,7 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import Product from "./singleProduct"
+import Product from "./SingleProduct"
 
 
 const Products = () => {
