@@ -59,7 +59,6 @@ const products = [{
   longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
   category: 'Top',
 }, {  
-}, {
   name: 'long-sleeved shirt',
   imageURL: 'https://jiffyshirts.imgix.net/adc55d82ae1d0e.png?ixlib=rb-0.3.4&auto=format&fit=fill&fill=solid&trim-color=FFFFFF&trim=color&trim-tol=8&w=307&h=480&dpr=2',
   price: '39.99',
@@ -67,7 +66,6 @@ const products = [{
   longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
   category: 'Top',
 }, {  
-}, {
   name: 'long-sleeved shirt',
   imageURL: 'https://jiffyshirts.imgix.net/f703b42c0119e3.png?ixlib=rb-0.3.4&auto=format&fit=fill&fill=solid&trim-color=FFFFFF&trim=color&trim-tol=8&w=307&h=480&dpr=2',
   price: '39.99',
@@ -75,7 +73,6 @@ const products = [{
   longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
   category: 'Top',
 }, {  
-}, {
   name: 'long-sleeved shirt',
   imageURL: 'https://jiffyshirts.imgix.net/42cab4438cfd1d.png?ixlib=rb-0.3.4&auto=format&fit=fill&fill=solid&trim-color=FFFFFF&trim=color&trim-tol=8&w=307&h=480&dpr=2',
   price: '39.99',
