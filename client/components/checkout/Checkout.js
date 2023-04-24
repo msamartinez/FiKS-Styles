@@ -1,170 +1,232 @@
-//! ** DUMMY CODE-ISH... NEEDS (maybe) TO BE CHANGED TO WORK WITH STRIPE **
-import React, { useState } from "react";
-import OrderSummary from "./OrderSummary";
-import Confirmation from "./Confirmation";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
+import { Formik } from "formik";
+import { useState } from "react";
+import * as yup from "yup";
+import { shades } from "../../theme";
+import Payment from "./Payment";
+import Shipping from "./Shipping";
+import { loadStripe } from "@stripe/stripe-js";
 
-// Define state variables for billing and shipping information, whether the user is editing the cart, and whether the user has confirmed their purchase
-function Checkout() {
-  const [billingInfo, setBillingInfo] = useState({
-    name: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-  });
-  const [shippingInfo, setShippingInfo] = useState({
-    name: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-  });
-  const [isEditingCart, setIsEditingCart] = useState(false);
-  const [isConfirmed, setIsConfirmed] = useState(false);
+const stripePromise = loadStripe(
+  "pk_test_51N05EOJ2WjlkSNi2LtzCEathCYQMmxYrujzwBTQi3SyTj7lMuoZFxuUhow6dRfMOv8OUdtDCXqNfMuDR7Z8NH56x00tTQ70NAh"
+);
 
-  // Define event handlers for changes to the billing and shipping information
-  function handleBillingInfoChange(event) {
-    const { name, value } = event.target;
-    setBillingInfo((prevBillingInfo) => ({
-      ...prevBillingInfo,
-      [name]: value,
-    }));
+const Checkout = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  const cart = useSelector((state) => state.cart.cart);
+  const isFirstStep = activeStep === 0;
+  const isSecondStep = activeStep === 1;
+
+  const handleFormSubmit = async (values, actions) => {
+    setActiveStep(activeStep + 1);
+
+    
+    if (isFirstStep && values.shippingAddress.isSameAddress) {
+      actions.setFieldValue("shippingAddress", {
+        ...values.billingAddress,
+        isSameAddress: true,
+      });
+    }
+
+    if (isSecondStep) {
+      makePayment(values);
+    }
+
+    actions.setTouched({});
+  };
+
+  async function makePayment(values) {
+    const stripe = await stripePromise;
+    const requestBody = {
+      userName: [values.firstName, values.lastName].join(" "),
+      email: values.email,
+      products: cart.map(({ id, count }) => ({
+        id,
+        count,
+      })),
+    };
+
+    const response = await fetch("http://localhost:8080/api/order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+    });
+
+    const session = await response.json();
+    let id=session.id.toString()
+
+    console.log(typeof id)
+    await stripe.redirectToCheckout({
+      sessionId:id ,
+    });
   }
   
-  function handleShippingInfoChange(event) {
-    const { name, value } = event.target;
-    setShippingInfo((prevShippingInfo) => ({
-      ...prevShippingInfo,
-      [name]: value,
-    }));
-  }
-  // Define event handlers for the "Edit Cart" and "Pay Now" buttons
-  function handleEditCart() {
-    setIsEditingCart(true);
-  }
-
-  function handlePayNow() {
-    setIsConfirmed(true);
-  }
-
-  // If the user has confirmed their purchase, render the Confirmation component
-  if (isConfirmed) {
-    return <Confirmation />;
-  }
-
-  // If the user is editing the cart, render the OrderSummary component
-  if (isEditingCart) {
-    return <OrderSummary />;
-  }
-
-  //render the billing and shipping information forms, along with the "Edit Cart" and "Pay Now" buttons
-  // this will change depending on how stripe works
 
   return (
-    <div>
-      <h2>Checkout</h2>
-      <h3>Billing Information</h3>
-      <form>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={billingInfo.name}
-          onChange={handleBillingInfoChange}
-        />
-        <br />
-        <label htmlFor="address">Address:</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          value={billingInfo.address}
-          onChange={handleBillingInfoChange}
-        />
-        <br />
-        <label htmlFor="city">City:</label>
-        <input
-          type="text"
-          id="city"
-          name="city"
-          value={billingInfo.city}
-          onChange={handleBillingInfoChange}
-        />
-        <br />
-        <label htmlFor="state">State:</label>
-        <input
-          type="text"
-          id="state"
-          name="state"
-          value={billingInfo.state}
-          onChange={handleBillingInfoChange}
-        />
-        <br />
-        <label htmlFor="zip">Zip:</label>
-        <input
-          type="text"
-          id="zip"
-          name="zip"
-          value={billingInfo.zip}
-          onChange={handleBillingInfoChange}
-        />
-      </form>
-      <br />
-      <h3>Shipping Information</h3>
-      <form>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={shippingInfo.name}
-          onChange={handleShippingInfoChange}
-        />
-        <br />
-        <label htmlFor="address">Address:</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          value={shippingInfo.address}
-          onChange={handleShippingInfoChange}
-        />
-        <br />
-        <label htmlFor="city">City:</label>
-        <input
-          type="text"
-          id="city"
-          name="city"
-          value={shippingInfo.city}
-          onChange={handleShippingInfoChange}
-        />
-        <br />
-        <label htmlFor="state">State:</label>
-        <input
-          type="text"
-          id="state"
-          name="state"
-          value={shippingInfo.state}
-          onChange={handleShippingInfoChange}
-        />
-        <br />
-        <label htmlFor="zip">Zip:</label>
-        <input
-          type="text"
-          id="zip"
-          name="zip"
-          value={shippingInfo.zip}
-          onChange={handleShippingInfoChange}
-        />
-      </form>
-      <br />
-      <button onClick={handleEditCart}>Edit Cart</button>
-      <button onClick={handlePayNow}>Pay Now</button>
-    </div>
+    <Box width="80%" m="100px auto">
+      <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
+        <Step>
+          <StepLabel>Billing</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Payment</StepLabel>
+        </Step>
+      </Stepper>
+      <Box>
+        <Formik
+          onSubmit={handleFormSubmit}
+          initialValues={initialValues}
+          validationSchema={checkoutSchema[activeStep]}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            setFieldValue,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              {isFirstStep && (
+                <Shipping
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+              {isSecondStep && (
+                <Payment
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+              <Box display="flex" justifyContent="space-between" gap="50px">
+                {!isFirstStep && (
+                  <Button
+                    fullWidth
+                    color="primary"
+                    variant="contained"
+                    sx={{
+                      backgroundColor: shades.primary[200],
+                      boxShadow: "none",
+                      color: "white",
+                      borderRadius: 0,
+                      padding: "15px 40px",
+                    }}
+                    onClick={() => setActiveStep(activeStep - 1)}
+                  >
+                    Back
+                  </Button>
+                )}
+                <Button
+                  fullWidth
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  sx={{
+                    backgroundColor: shades.primary[400],
+                    boxShadow: "none",
+                    color: "white",
+                    borderRadius: 0,
+                    padding: "15px 40px",
+                  }}
+                >
+                  {!isSecondStep ? "Next" : "Place Order"}
+                </Button>
+              </Box>
+            </form>
+          )}
+        </Formik>
+      </Box>
+    </Box>
   );
-}
+};
+
+const initialValues = {
+  billingAddress: {
+    firstName: "",
+    lastName: "",
+    country: "",
+    street1: "",
+    street2: "",
+    city: "",
+    state: "",
+    zipCode: "",
+  },
+  shippingAddress: {
+    isSameAddress: true,
+    firstName: "",
+    lastName: "",
+    country: "",
+    street1: "",
+    street2: "",
+    city: "",
+    state: "",
+    zipCode: "",
+  },
+  email: "",
+  phoneNumber: "",
+};
+
+const checkoutSchema = [
+  yup.object().shape({
+    billingAddress: yup.object().shape({
+      firstName: yup.string().required("required"),
+      lastName: yup.string().required("required"),
+      country: yup.string().required("required"),
+      street1: yup.string().required("required"),
+      street2: yup.string(),
+      city: yup.string().required("required"),
+      state: yup.string().required("required"),
+      zipCode: yup.string().required("required"),
+    }),
+    shippingAddress: yup.object().shape({
+      isSameAddress: yup.boolean(),
+      firstName: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      lastName: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      country: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      street1: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      street2: yup.string(),
+      city: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      state: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      zipCode: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+    }),
+  }),
+  yup.object().shape({
+    email: yup.string().required("required"),
+    phoneNumber: yup.string().required("required"),
+  }),
+];
 
 export default Checkout;
-
-

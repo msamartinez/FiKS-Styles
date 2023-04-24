@@ -9,6 +9,7 @@ import { setIsCartOpen } from "../../store/cartSlice";
 import { setIsMenuOpen }  from "../../store/menuslice"
 
 const Navbar =()=>{
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const Navigate= useNavigate()
   const dispatch = useDispatch()
   const cart= useSelector(state=>state.cart)
@@ -44,10 +45,16 @@ const Navbar =()=>{
           <IconButton >
             <SearchOutlined></SearchOutlined>
           </IconButton>
+          {isLoggedIn ? (
           <IconButton onClick={() => {
                 Navigate("/user")}} >
             <PersonOutline/>
-          </IconButton>
+          </IconButton>) : (
+           <IconButton onClick={() => {
+            Navigate("/login")}}>
+              <PersonOutline/>
+            </IconButton>
+          )}
 
           <Badge
             badgeContent={cart.length}

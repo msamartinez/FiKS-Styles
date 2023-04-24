@@ -17,6 +17,7 @@ const FlexBox = styled(Box)`
 `
 
 const Menu =()=>{
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
  const navigate = useNavigate();
  const dispatch = useDispatch();
   const isMenuOpen = useSelector((state) =>state.menu.isMenuOpen);
@@ -51,13 +52,20 @@ return (
               <CloseIcon />
             </IconButton>
           </FlexBox>
-
-          <FlexBox  p="15px 0" onClick={() => {navigate("/signup")}}>
+           {isLoggedIn ? (
+          <FlexBox  p="15px 0" onClick={() => {navigate("/login")}}>
           <IconButton>
             <PeopleOutlinedIcon size={30}/>
-            <Typography variant="h4">SignUp/Login</Typography>
+            <Typography variant="h4">Logout</Typography>
             </IconButton>
-          </FlexBox>
+          </FlexBox>) : (
+            <FlexBox  p="15px 0" >
+            <IconButton>
+              <PeopleOutlinedIcon size={30}/>
+              <Typography variant="h4">SignUp/Login</Typography>
+              </IconButton>
+            </FlexBox>
+          )}
 
           <FlexBox  p="15px 0" onClick={() => {navigate("/sizechart")}} >
           <IconButton>

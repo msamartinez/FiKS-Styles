@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
@@ -8,6 +8,7 @@ import styled from "@emotion/styled";
 import { shades } from "../../theme";
 import {decreaseCount,increaseCount,removeFromCart,setIsCartOpen } from "../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { me } from '../../store/authSlice';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -15,7 +16,9 @@ const FlexBox = styled(Box)`
   align-items: center;
 `
 
+
 const Cart =()=>{
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
@@ -23,6 +26,14 @@ const Cart =()=>{
   const totalPrice = cart.reduce((total, product) => {
     return total + product.count * product.price;
   }, 0).toFixed(2);
+
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+
+
+  // useEffect(() => {
+  //   dispatch(me());
+  // }, []);
+
 
     return (
       <Box
@@ -63,7 +74,7 @@ const Cart =()=>{
                       alt={product.name}
                       width="123px"
                       height="164px"
-                      src={product.imageUrl}
+                      src={product.imageURL}
                     />
                   </Box>
                   <Box flex="1 1 60%">
@@ -119,6 +130,8 @@ const Cart =()=>{
               <Typography fontWeight="bold">SUBTOTAL</Typography>
               <Typography fontWeight="bold">${totalPrice}</Typography>
             </FlexBox>
+            
+              {isLoggedIn ? (
             <Button
               sx={{
                 backgroundColor: shades.primary[500],
@@ -135,6 +148,25 @@ const Cart =()=>{
             >
               CHECKOUT
             </Button>
+             ) : (
+              
+              <Button
+              sx={{
+                backgroundColor: shades.primary[500],
+                color: "white",
+                borderRadius: 0,
+                minWidth: "100%",
+                padding: "20px 40px",
+                m: "20px 0",
+              }}
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+               Please Login First
+            </Button>
+            )} 
+            
           </Box>
         </Box>
       </Box>

@@ -6,6 +6,8 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Product from "./SingleProduct"
+
+
 const Products = () => {
     const products = useSelector((state)=> state.products.allProducts);
     const dispatch = useDispatch();

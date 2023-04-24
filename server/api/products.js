@@ -11,14 +11,35 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:productId', async (req, res, next) => {
     try {
-        const product = await Product.findByPk(req.params.id);
+        const product = await Product.findByPk(req.params.productId);
         res.json(product);
     }
     catch (error) {
         next (error);
     }
 })
+
+router.put('/:productId', async(req,res,next)=>{
+    try{
+        const target = await Product.findByPk(req.params.productId)
+        res.send(await target.update(req.body))
+    }
+    catch(error){
+      next(error)
+    }
+  })
+
+  router.delete('/:productId', async(req,res,next)=>{
+    try{
+      const product = await Product.destroy({ where: {id : req.params.productId }})
+        res.sendStatus(204)
+      }
+    catch(error){
+      next(error)
+    }
+  })
+
 
 module.exports = router

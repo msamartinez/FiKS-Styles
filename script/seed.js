@@ -1,26 +1,29 @@
 'use strict'
 
-const { db, User, Product, OrderDetail, OrderItem } = require('../server/db/index');
+const { db, User, Product, Cart, CartItems,Order } = require('../server/db/index');
 const {green, red} = require('chalk');
 
 const users = [{ 
-  email: 'harrypotter@hogwarts.com',
+  username: 'harrypotter@hogwarts.com',
   address: 'Somewhere in London',
   password: '123', 
   firstName: 'Harry',
   lastName: 'Potter',
+  isAdmin:false,
  }, {
-  email: 'bigpharma@moderna.com',
+  username: 'bigpharma@moderna.com',
   address: 'Somewhere in Edgewater NJ',
   password: '123', 
   firstName: 'Kelvin',
   lastName: 'Reynolds',
+  isAdmin:false,
  }, {
-  email: 'bsamuel.brown48@email.com',
+  username: 'bsamuel.brown48@email.com',
   address: 'Somewhere in Edgewater NJ',
-  password: '12345asdf', 
+  password: '123', 
   firstName: 'John',
   lastName: 'Kazantzis',
+  isAdmin:true,
 }];
 
 const products = [{
@@ -172,47 +175,7 @@ const products = [{
   category: 'Dress',
 }];
 
-const ordersDetail=[{
-  price:"39.99",
-  user_id:1,
-  productId:2,
-  orderitemId:1
-},
-{
-  price:"29.99",
-  user_id:2,
-  productId:3,
-  orderitemId:2
-},
-{
-  price:"39.99",
-  user_id:3,
-  productId:4,
-  orderitemId:3
-}
-];
 
-const orderItem=[
-  {
-  
-    status:"completed",
-    orders_id:1,
-    productId:2,
-    userId:1
-  },
-  {
-    status:"completed",
-    orders_id:2,
-    products_id:3,
-    userId:2
-  },
-  {
-    status:"completed",
-    orders_id:3,
-    products_id:4,
-    userId:3
-  },
-];
 
 
 
@@ -231,19 +194,17 @@ const seed = async () => {
             return Product.create(product);
           })
         );
-        await Promise.all(
-          orderItem.map(orderItem => {
-            return OrderItem.create(orderItem);
-          })
-        );
+        // await Promise.all(
+        //   Carts.map(cart => {
+        //     return Cart.create(cart);
+        //   })
+        // );
 
-        await Promise.all(
-          ordersDetail.map(order => {
-            return OrderDetail.create(order);
-          })
-        );
-
-        
+        // await Promise.all(
+        //   Orders.map(order => {
+        //     return Order.create(order);
+        //   })
+        // );
 
         console.log(green('Seeding success!'));
 
