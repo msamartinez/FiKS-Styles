@@ -65,4 +65,4 @@ const submithandel = async(event)=>{
   );
 };
 
-export default ProductDetails;
+export default AdminDetail;
