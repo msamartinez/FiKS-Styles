@@ -50,11 +50,10 @@ const Navbar =()=>{
                 Navigate("/user")}} >
             <PersonOutline/>
           </IconButton>) : (
-          //  <IconButton onClick={() => {
-          //   Navigate("/login")}}>
-          //     <PersonOutline/>
-          //   </IconButton>
-          <div></div>
+           <IconButton onClick={() => {
+            Navigate("/login")}}>
+              <PersonOutline/>
+            </IconButton>
           )}
 
           <Badge

@@ -56,13 +56,13 @@ return (
           <FlexBox  p="15px 0" onClick={() => {navigate("/login")}}>
           <IconButton>
             <PeopleOutlinedIcon size={30}/>
-            <Typography variant="h4">SignUp/Login</Typography>
+            <Typography variant="h4">Logout</Typography>
             </IconButton>
           </FlexBox>) : (
             <FlexBox  p="15px 0" >
             <IconButton>
               <PeopleOutlinedIcon size={30}/>
-              <Typography variant="h4">Logout</Typography>
+              <Typography variant="h4">SignUp/Login</Typography>
               </IconButton>
             </FlexBox>
           )}
