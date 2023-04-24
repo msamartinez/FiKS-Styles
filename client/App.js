@@ -3,7 +3,7 @@ import Navbar from './components/global/Navbar';
 import { useEffect } from 'react';
 import {Routes, Route, useLocation} from "react-router-dom"
 import AppRoutes from "./AppRoutes"
-import Cart from './components/global/Cart';
+import Cart from './components/global/cart';
 import Menu from './components/global/menu';
 
 const ScrollToTop = ()=>{

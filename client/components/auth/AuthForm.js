@@ -17,7 +17,7 @@ const AuthForm = ({ name, displayName }) => {
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    dispatch(authenticate({ username, password, method: login }));
+    dispatch(authenticate({ username, password, method: formName }));
   };
 
   return (

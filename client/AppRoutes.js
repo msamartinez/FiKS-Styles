@@ -7,7 +7,6 @@ import ProductDetail from './components/homepage/productDetail';
 import Checkout from './components/checkout/Checkout';
 import Confirmation from './components/checkout/Confirmation';
 import AuthForm from "./components/auth/AuthForm"
-import Cart from "./components/global/Cart";
 import User from "./components/auth/user"
 import Menu from './components/global/menu';
 import SizeChart from './components/SizeChart';
@@ -19,16 +18,16 @@ import AdminDetail from "./components/auth/admin/AdminDetail"
  */
 
 const AppRoutes = () => {
-  // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(me());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(me());
+  // }, []);
 
   return (
     <div>
-    {/* {isLoggedIn ? ( */}
+    {isLoggedIn ? (
       <Routes>
        <Route path="/" element={<Main/>}></Route>
        <Route path="/product/:productId" element={<ProductDetail/>}></Route>
@@ -40,7 +39,7 @@ const AppRoutes = () => {
        <Route path="/admin/:productId" element={<AdminDetail/>}/>
 
       </Routes>
-    {/* ) : (
+    ) : (
       <Routes>
         <Route path="/" element={<Main/>}></Route>
        <Route path="/product/:productId" element={<ProductDetail/>}></Route>
@@ -56,7 +55,7 @@ const AppRoutes = () => {
        <Route path="/contact" element={<AboutContact/>}/>
         
       </Routes>
-    )} */}
+    )}
   </div>
 );
 };

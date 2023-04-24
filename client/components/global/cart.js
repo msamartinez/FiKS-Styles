@@ -30,9 +30,9 @@ const Cart =()=>{
   // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
 
 
-  useEffect(() => {
-    dispatch(me());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(me());
+  // }, []);
 
 
     return (
