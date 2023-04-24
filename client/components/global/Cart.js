@@ -22,7 +22,7 @@ const Cart =()=>{
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const totalPrice = cart.reduce((total, product) => {
     return total + product.count * product.price;
-  }, 0);
+  }, 0).toFixed(2);
 
     return (
       <Box
