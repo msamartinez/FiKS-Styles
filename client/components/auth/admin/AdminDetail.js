@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct, updateProduct,fetchProducts } from "../../../store/productSlice";
 import { shades } from "../../../theme";
 
-const ProductDetails = () => {
+const AdminDetail = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const product= useSelector(state=> state.products.singleProduct)
