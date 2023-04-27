@@ -1,18 +1,20 @@
-import React, { useEffect ,useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect ,useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {fetchProducts } from "../../store/productSlice"
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import Product from "./SingleProduct"
+import Product from "./SingleProduct";
 
-
-const Products = () => {
+const Products = ({currentPage}) => {
     const products = useSelector((state)=> state.products.allProducts);
     const dispatch = useDispatch();
     const [value, setValue] = useState("all");
-    const cartitems= useSelector((state) => state.cart.items)
+    const cartitems= useSelector((state) => state.cart.items);
+    const productsPerPage = 10;
+    const startIndex = (currentPage - 1) * productsPerPage;  
+    const endIndex = startIndex + productsPerPage;
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -22,17 +24,20 @@ const Products = () => {
         dispatch(fetchProducts());
     }, [dispatch]);
    
-     const Top = products.filter(
-        (product) => product.category === "Top"
-      );
-      const Bottom = products.filter(
-        (product) => product.category === "Bottom"
-      );
+    const Top = products.filter((product) => product.category === "Top");
+    const Bottom = products.filter((product) => product.category === "Bottom");
+    const Dress = products.filter((product) => product.category === "Dress");
 
-      const Dress = products.filter(
-        (product) => product.category === "Dress"
-      );
-      return (
+    const filteredProducts =
+      value === "all"
+        ? products.slice(startIndex, endIndex)
+        : value === "TOP"
+          ? Top.slice(startIndex, endIndex)
+          : value === "BOTTOM"
+            ? Bottom.slice(startIndex, endIndex)
+            : Dress.slice(startIndex, endIndex);
+
+    return (
         <Box width="80%" margin="80px auto">
           <Typography variant="h3" textAlign="center">
             Our Featured <b>Products</b>
@@ -63,21 +68,8 @@ const Products = () => {
             rowGap="20px"
             columnGap="1.33%"
           >
-            {value === "all" &&
-              products.map((product) => (
-                <Product product={product} key={product.id} />
-              ))}
-            {value === "TOP" &&
-              Top.map((product) => (
-                <Product product={product} key={product.id} />
-              ))}
-            {value === "BOTTOM" &&
-               Bottom.map((product) => (
-                <Product product={product} key={product.id} />
-              ))}
-            {value === "DRESS" &&
-              Dress.map((product) => (
-                <Product product={product} key={product.id} />
+            {filteredProducts.map((product) => (
+                    <Product product={product} key={product.id} />
               ))}
           </Box>
         </Box>
