@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const  {User} = require('../db/index')
+const { requireToken, isAdmin } = require('./gatekeepingMiddleware')
 
 // function isAccess(req, res, next) {
 //   if (!req.user || req.user.securityClearance !== 'admin')
@@ -13,9 +14,11 @@ const  {User} = require('../db/index')
 //   else next()
 // }
 
-router.get('/', async (req, res, next) => {
+router.get('/', requireToken, isAdmin, async (req, res, next) => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll({
+      attributes: ['id', 'username']
+    })
     res.json(users)
   } catch (err) {
     next(err)

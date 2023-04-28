@@ -11,7 +11,7 @@ As a customer/visitor, I want to be able to:
         [ ]No one else should be able to edit my cart except me.
     [X]"checkout" the items in my cart so I can purchase my desired goods.
         [ ]Think of a typical user experience on popular websites from a guest user and logged-in user perspective.
-        [X]You can just start with by simulating the experience of checking out with a simple confirmation page.
+        [ ]You can just start with by simulating the experience of checking out with a simple confirmation page.
     [X]create an account so I can have a logged-in experience.
     
 
