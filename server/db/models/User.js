@@ -9,7 +9,7 @@ const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
   },
   password: {
     type: Sequelize.STRING,
@@ -19,15 +19,14 @@ const User = db.define('user', {
         allowNull: false,
       validate:{
         notEmpty:true
-      } 
+      }, 
     },
     lastName:{
         type: Sequelize.STRING,
         allowNull: false,
       validate:{
         notEmpty:true
-      } 
-    
+      } ,
     },
     fullName:{
       type:Sequelize.VIRTUAL,
