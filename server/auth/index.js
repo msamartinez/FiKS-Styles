@@ -10,6 +10,16 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+router.post('/logout', async (req, res, next) => {
+  try {
+    await req.session.destroy();
+    res.status(200).send('Logged out succesfully');
+  }
+  catch (error) {
+    res.status.apply(500).send(error.message);
+  }
+});
+
 router.post('/signup', async (req, res, next) => {
   try {
     const { username, password, firstName, lastName } = req.body

@@ -43,6 +43,7 @@ const AppRoutes = () => {
           path="/signup"
           element={<AuthForm name="signup" displayName="Sign Up" />}
         />
+        <Route path="/logout" element={<Main/>}/>
 
       </Routes>
     ) : (
@@ -59,7 +60,6 @@ const AppRoutes = () => {
         />
          <Route path="/sizechart" element={<SizeChart/>}/>
        <Route path="/contact" element={<AboutContact/>}/>
-       
       </Routes>
     )}
   </div>
