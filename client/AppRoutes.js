@@ -31,7 +31,7 @@ const AppRoutes = () => {
        <Route path="/product/:productId" element={<ProductDetail/>}></Route>
        <Route path="checkout" element={<Checkout />} />
        <Route path="checkout/success" element={<Confirmation/>} />
-      <Route path="/user" element={<User/>} />
+       <Route path="/user" element={<User/>} />
        <Route path="/sizechart" element={<SizeChart/>}/>
        <Route path="/contact" element={<AboutContact/>}/>
        <Route path="/admin/:productId" element={<AdminDetail/>}/>
@@ -48,7 +48,7 @@ const AppRoutes = () => {
     ) : (
       <Routes>
         <Route path="/" element={<Main/>}></Route>
-       <Route path="/product/:productId" element={<ProductDetail/>}></Route>
+        <Route path="/product/:productId" element={<ProductDetail/>}></Route>
         <Route
           path="/login"
           element={<AuthForm name="login" displayName="Login" />}
@@ -59,7 +59,7 @@ const AppRoutes = () => {
         />
          <Route path="/sizechart" element={<SizeChart/>}/>
        <Route path="/contact" element={<AboutContact/>}/>
-        
+       
       </Routes>
     )}
   </div>

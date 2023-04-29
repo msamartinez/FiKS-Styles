@@ -3,23 +3,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../store/store';
 
 /**
-  The AuthForm component can be used for Login or Sign Up.
-  Props for Login: name="login", displayName="Login"
-  Props for Sign up: name="signup", displayName="Sign Up"
-**/
-
+ * The AuthForm component can be used for Login or Sign Up.
+ * Props for Login: name="login", displayName="Login"
+ * Props for Sign up: name="signup", displayName="Sign Up"
+ */
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const isSignUp = name === 'signup';
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
-    const username = evt.target.username.value;
-    const password = evt.target.password.value;
-    const firstName = evt.target.firstname.value;
-    const lastName = evt.target.lastname.value;
+    const username = evt.target.username ? evt.target.username.value : '';
+    const password = evt.target.password ? evt.target.password.value : '';
+    const firstName = evt.target.firstName ? evt.target.firstName.value : '';
+    const lastName = evt.target.lastName ? evt.target.lastName.value : '';
     dispatch(authenticate({ username, password, firstName, lastName, method: formName }));
+    if (name === 'signup') {
+      window.alert('You have successfully signed up!');
+    } else if (name === 'login') {
+      window.alert('You have successfully logged in!');
+    }
   };
 
   return (
@@ -31,18 +36,22 @@ const AuthForm = ({ name, displayName }) => {
           </label>
           <input name="username" type="text" />
         </div>
-        <div>
-          <label htmlFor="firstname">
-            <small>firstName</small>
-          </label>
-          <input name="firstname" type="text" />
-        </div>
-        <div>
-          <label htmlFor="lastname">
-            <small>lastName</small>
-          </label>
-          <input name="lastname" type="text" />
-        </div>
+        {isSignUp && (
+          <>
+            <div>
+              <label htmlFor="firstName">
+                <small>First Name</small>
+              </label>
+              <input name="firstName" type="text" required />
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name</small>
+              </label>
+              <input name="lastName" type="text" required />
+            </div>
+          </>
+        )}
         <div>
           <label htmlFor="password">
             <small>Password</small>
