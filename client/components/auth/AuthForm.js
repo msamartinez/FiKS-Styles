@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../store/store';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 
 /**
  * The AuthForm component can be used for Login or Sign Up.
@@ -28,42 +29,49 @@ const AuthForm = ({ name, displayName }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Typography variant="h5" sx={{ mb: 2 }}>
+        {displayName}
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} name={name} sx={{ width: '100%', maxWidth: 360 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
           <label htmlFor="username">
             <small>Username</small>
           </label>
           <input name="username" type="text" />
-        </div>
+        </Box>
         {isSignUp && (
           <>
-            <div>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
               <label htmlFor="firstName">
                 <small>First Name</small>
               </label>
               <input name="firstName" type="text" required />
-            </div>
-            <div>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
               <label htmlFor="lastName">
                 <small>Last Name</small>
               </label>
               <input name="lastName" type="text" required />
-            </div>
+            </Box>
           </>
         )}
-        <div>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
           <label htmlFor="password">
             <small>Password</small>
           </label>
           <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && <div> {error} </div>}
-      </form>
-    </div>
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+          <Button variant="contained" type="submit">
+            {displayName}
+          </Button>
+        </Box>
+        {error && (
+          <Box sx={{ color: 'red', textAlign: 'center', mb: 2 }}>{error}</Box>
+        )}
+      </Box>
+    </Box>
   );
 };
 
