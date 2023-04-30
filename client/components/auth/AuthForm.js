@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { authenticate } from '../../store/store';
 import { Box, Button, IconButton, Typography } from '@mui/material';
 
@@ -12,6 +13,7 @@ const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const isSignUp = name === 'signup';
+  const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -21,6 +23,7 @@ const AuthForm = ({ name, displayName }) => {
     const firstName = evt.target.firstName ? evt.target.firstName.value : '';
     const lastName = evt.target.lastName ? evt.target.lastName.value : '';
     dispatch(authenticate({ username, password, firstName, lastName, method: formName }));
+    navigate('/')
     if (name === 'signup') {
       window.alert('You have successfully signed up!');
     } else if (name === 'login') {
