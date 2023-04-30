@@ -10,6 +10,7 @@ import styled from "@emotion/styled";
 import { shades } from "../../theme";
 import { setIsMenuOpen }  from "../../store/menuslice"
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../store/authSlice";
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -22,6 +23,11 @@ const Menu =()=>{
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isMenuOpen = useSelector((state) =>state.menu.isMenuOpen);
+
+const handleLogout = (event) => {
+  event.preventDefault();
+  dispatch(logout());
+};
 
   return (
     <Box 
@@ -62,7 +68,7 @@ const Menu =()=>{
 
           {isLoggedIn ? (
             <>
-              <FlexBox p="15px 0" onClick={() => navigate("/logout")}>
+              <FlexBox p="15px 0" onClick={(handleLogout)}>
                 <IconButton>
                   <PeopleOutlinedIcon size={30}/>
                   <Typography variant="h4">Logout</Typography>

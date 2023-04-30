@@ -25,7 +25,7 @@ router.get('/', requireToken, isAdmin, async (req, res, next) => {
   }
 })
 
-router.get('/:userId', async(req,res,next)=>{
+router.get('/:userId', requireToken, isAdmin, async(req,res,next)=>{
   try{
     const single = await User.findByPk(
       req.params.userId
@@ -52,7 +52,7 @@ router.post('/', async(req,res,next)=>{
 })
 
 
-router.delete('/:userId', async(req,res,next)=>{
+router.delete('/:userId', requireToken, isAdmin, async(req,res,next)=>{
   try{
     const deleteuser = await User.destroy({ where: {id : req.params.userId }})
       res.sendStatus(204)
