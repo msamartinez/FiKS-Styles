@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk  } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-
 export const fetchCartItems = createAsyncThunk(
   "cart/fetchItems",
   async (userId) => {
@@ -38,8 +36,6 @@ export const removeItemFromCart = createAsyncThunk(
   }
 );
 
-
-
 const initialState = {
     isCartOpen: false,
     cart: [],
@@ -49,13 +45,26 @@ const initialState = {
   export const cartSlice = createSlice({
     name: "cart",
     initialState,
+    initialState: {
+    isCartOpen: false,
+    cart: [],
+    items: [],
+  },
     reducers: {
       setItems: (state, action) => {
         state.items = action.payload;
       },
   
       addToCart: (state, action) => {
-        state.cart = [...state.cart, action.payload.item];
+        const { item } = action.payload;
+        const cartItem = state.cart.find((i) => i.id === item.id);
+
+        if (cartItem) {
+          cartItem.count += item.count;
+        } 
+        else {
+          state.cart.push(item);
+        }
       },
   
       removeFromCart: (state, action) => {

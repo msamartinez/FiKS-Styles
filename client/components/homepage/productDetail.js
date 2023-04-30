@@ -38,13 +38,16 @@ const ProductDetails = () => {
         <Box flex="1 1 50%" mb="40px">
 
           <Box m="65px 0 25px 0">
-            <Typography variant="h3">{product.name}</Typography>
-            <Typography>${product.price}</Typography>
+            <Typography variant="h3">{product.shortDescription}</Typography>
+            <Typography> {product.name}</Typography>
+            <Typography> Category: {product.category}</Typography>
+            <br/>
+            <Typography variant="h6">${product.price}</Typography>
             <Typography sx={{ mt: "20px" }}>
               {product.longDescription}
             </Typography>
           </Box>
-
+            <br/>
           <Box display="flex" alignItems="center" minHeight="50px">
           <Button
               sx={{
@@ -58,9 +61,6 @@ const ProductDetails = () => {
             >
               ADD TO CART
             </Button> 
-          </Box>
-          <Box>
-            <Typography>CATEGORIES: {product.category}</Typography>
           </Box>
         </Box>
       </Box>

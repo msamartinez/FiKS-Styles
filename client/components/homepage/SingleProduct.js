@@ -72,11 +72,11 @@ const Product=(props)=>{
         <Typography color={neutral.dark}>
           {product.category}
         </Typography>
-        <Typography>{product.name}</Typography>
+        <Typography>{product.shortDescription}</Typography>
         <Typography fontWeight="bold">${product.price}</Typography>
       </Box>
     </Box>
   );
 };
 
-export default Product
+export default Product;

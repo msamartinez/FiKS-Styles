@@ -44,14 +44,14 @@ const AdminProduct=(props)=>{
           width="100%"
           padding="0 5%"
         >
-          <Box display="flex" justifyContent="space-between">
+          {/* <Box display="flex" justifyContent="space-between">
             <Button
               onClick={()=>handeldelete(adminproduct.id)}
               sx={{ backgroundColor: shades.primary[300], color: "white" }}
             >
               Out of Stock
             </Button>
-          </Box>
+          </Box> */}
 
         </Box>
       </Box>
