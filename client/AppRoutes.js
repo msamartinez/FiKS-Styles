@@ -60,6 +60,7 @@ const AppRoutes = () => {
         />
          <Route path="/sizechart" element={<SizeChart/>}/>
        <Route path="/contact" element={<AboutContact/>}/>
+       <Route path="checkout" element={<Checkout />} />
       </Routes>
     )}
   </div>
