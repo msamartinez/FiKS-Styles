@@ -1,23 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import axios from "axios";
 import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
 import { Formik } from "formik";
-import { useState } from "react";
 import * as yup from "yup";
 import { shades } from "../../theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
-import { loadStripe } from "@stripe/stripe-js";
-
-const stripePromise = loadStripe(
-  "pk_test_51N05EOJ2WjlkSNi2LtzCEathCYQMmxYrujzwBTQi3SyTj7lMuoZFxuUhow6dRfMOv8OUdtDCXqNfMuDR7Z8NH56x00tTQ70NAh"
-);
+import StripeContainer from "./StripeContainer";
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const cart = useSelector((state) => state.cart.cart);
   const isFirstStep = activeStep === 0;
   const isSecondStep = activeStep === 1;
+
+  const [success, setSuccess] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const {error, paymentMethod} = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement)
+    })
+  
+    if(!error) {
+      try {
+        const {id} = paymentMethod
+        const response = await axios.post("/payment", {
+          amount: product.price,
+          id
+        })
+
+        if(response.data.success) {
+          console.log("Successful payment")
+          setSuccess(true)
+        }
+
+      } catch (error) {
+        console.log("Error", error)
+      }
+    } else {
+      console.log(error.message)
+    }
+  }
 
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
@@ -146,6 +175,20 @@ const Checkout = () => {
               </Box>
             </form>
           )}
+      {!success ?
+        <form onSubmit={handleSubmit}>
+            <fieldset className="FormGroup">
+                <div className='FormRow'>
+                    <CardElement options={CARD_OPTIONS}/>
+                </div>
+            </fieldset>
+            <button>Pay</button>
+        </form>
+        :
+        <div>
+            <h2>Thanks for shopping with us!</h2>
+        </div>  
+        }
         </Formik>
       </Box>
     </Box>
