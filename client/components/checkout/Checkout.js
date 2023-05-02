@@ -48,19 +48,29 @@ const Checkout = () => {
       })),
     };
 
-    const response = await fetch("http://localhost:8080/api/order", {
+    const response = await fetch("http://localhost:8080/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),
-    });
+    })
+    .then(res => {
+      if (res.ok) return res.json()
+      return res.json().then(json => Promise.reject(json))
+    })
+    .then(({ url }) => {
+      window.location = url
+    })
+    .catch(e => {
+      console.error(e.error)
+    })
 
-    const session = await response.json();
-    let id=session.id.toString()
+    // const session = await response.json();
+    // let id=session.id.toString()
 
-    console.log(typeof id)
-    await stripe.redirectToCheckout({
-      sessionId:id ,
-    });
+  //   console.log(typeof id)
+  //   await stripe.redirectToCheckout({
+  //     sessionId:id ,
+  //   });
   }
   
 
